@@ -61,3 +61,9 @@ url: "" # the base hostname & protocol for your site
 # The following settings are NECESSARY for the Prologue theme to run:
 remote_theme: chrisbobbe/jekyll-theme-prologue
 collections: [sections]
+
+markdown: kramdown
+kramdown:
+  input: GFM # Enable GitHub Flavored Markdown (fenced code blocks)
+  hard_wrap: true
+  syntax_highlighter: rouge
