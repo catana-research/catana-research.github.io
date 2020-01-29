@@ -45,34 +45,29 @@
 			var $nav_a = $('#nav a.scrolly');
 
 			// Scrolly-fy links.
-				$nav_a
-					.addClass('scrolly')
-                    .on('click', function(e) {
+				if($nav_a.scrolly()){
+					$nav_a
+						.scrolly()
+						.on('click', function(e) {
 
-                        var $this = $(this);
+							var t = $(this),
+								href = t.attr('href');
 
-                        // External link? Bail.
-                            if ($this.attr('href').charAt(0) != '#')
-                                return false;
+							if (href[0] != '#')
+								return;
 
-                        // Prevent default.
-                            e.preventDefault();
+							e.preventDefault();
 
-                        if ($this.hasClass("active"))
-                            return false;
-                        // Deactivate all links.
-                            $nav_a.removeClass('active');
-                            $nav_a.removeClass('active-locked');
+							// Clear active and lock scrollzer until scrolling has stopped
+								$nav_a
+									.removeClass('active')
+									.addClass('scrollzer-locked');
 
-                        // Activate link *and* lock it (so Scrollex doesn't try to activate other links as we're scrolling to this one's section).
+							// Set this link to active
+								t.addClass('active');
 
-                            $this
-                                .addClass('active')
-                                .addClass('active-locked');
-                        //Return false essentially calls both preventDefault() and stopPropagation()
-                        return false;
-
-					})
+						});
+				}
 
 			// Initialize scrollzer.
 
