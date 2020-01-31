@@ -1,0 +1,12 @@
+<h2>All Categories:</h2>
+{% capture temptags %}
+  {% for cat in site.categories %}
+    {{ cat[1].size | plus: 1000 }}#{{ cat[0] }}#{{ cat[1].size }}
+  {% endfor %}
+{% endcapture %}
+{% assign sortedtemptags = temptags | split:' ' | sort | reverse %}
+{% for temptag in sortedtemptags %}
+  {% assign tagitems = temptag | split: '#' %}
+  {% capture tagname %}{{ tagitems[1] }}{% endcapture %}
+  <a class="no-underline" href="/category/{{ tagname }}"><code class="highligher-rouge"><nobr>{{ tagname }}</nobr></code></a>
+{% endfor %}

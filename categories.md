@@ -14,3 +14,5 @@ order: 3
     {% endfor %}
   </ul>
 {% endfor %}
+
+{%- include cat_summary.html -%}

@@ -14,12 +14,26 @@ layout: default
 			<a href="{{- _post.url | absolute_url -}}">{{- _post.title -}}</a>
 		{%- endcapture -%}
 		{%- capture _subtitle -%}
+            {{- _post.subtitle -}}<br>
 			{% if _post.author -%}{{- _post.author }} | {% endif %}
-			{{- _post.date | date_to_long_string -}}
+			{{- _post.date | date_to_long_string -}}<br>
+            <span>
+            {% for tag in _post.tags %}
+                <a href="/tag/{{ tag }}"><code class="highligher-rouge"><nobr>{{ tag }}</nobr></code>&nbsp;</a>
+            {% endfor %}
+            </span>
 		{%- endcapture -%}
 		{%- capture _excerpt -%}<p>{{- _post.excerpt | strip_html | truncatewords: 100 -}}</p>{%- endcapture -%}
 		{%- capture _link -%}<a href="{{- _post.url | absolute_url -}}">read more</a>{%- endcapture -%}
 		{%- assign _content = _excerpt | append: _link -%}
-		{%- include section.html title=_title subtitle=_subtitle content=_content -%}
+        
+        
+        {% capture image-dir %} /assets/images{{- _post.path | relative_url | replace: '.md', '/' | replace: '_', '' -}}{{- _post.photo}} {% endcapture %}
+         {% capture image-dir %} /assets/images{{- _post.path | relative_url | replace: '.md', '/' | replace: '_', '' -}}{{- _post.photo}} {% endcapture %}
+        <h2>{{ image-dir }}</h2>
+        <img src="{{image-dir}}{{- _post.photo | relative_url  -}}" alt="{{- _post.photo-alt -}}" class="back">
+         {% capture photo-alt %}test{% endcapture %}
+        
+		{%- include section.html title=_title subtitle=_subtitle content=_content photo=image-dir photo-alt=photo-alt -%}
 	{%- endfor -%}
 </div>

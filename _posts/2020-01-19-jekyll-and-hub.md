@@ -1,18 +1,18 @@
 ---
 layout: post
-title: Jekyll Template
-subtitle: Making websites with Jekyll and GitHub pages.
-photo: assets/images/banner_2.jpg
+title: Jekyll and Hub
+subtitle: Making a website with Jekyll and GitHub pages.
+photo: banner_700x420.jpg
 photo-alt: example cover photo
+categories: [Web]
+tags: [Jekyll, GitHub]
 ---
-
-
-Some filler text on motivation...
-
 
 Jekyll is a scripting language that enables you to quickly build webpages using markdown. Combined with [GitHub pages](https://pages.github.com) you can develop and host your own custom website for free. 
 
 Let's get to it.
+
+---
 
 ## Setup
 
@@ -24,19 +24,18 @@ git clone https://github.com/catana-research/catana-research.github.io.git
 ```
 This will be a good base for your website which you can tweak later [(see below)](#tweaking-your-site).
 
-
 Rename the old _origin_ to _source_ to enable pulling from the template repo and add your own repo:
 ```bash
 git remote rename origin source
 git remote add origin https://github.com/catana-research/catana-research.github.io.git
 ```
 
+
 ---
 
+## Deployment
 
-
-
-## Local deployment
+### Locally
 
 With Jekyll you can easily deploying your website to your local machine, enabling you to quickly make and review changes before deploying to the web. Before deploying locally you must first install the packages for the the website. To do this, open a command prompt in the directory root and install the required website packages with:
 
@@ -55,11 +54,12 @@ bundle exec jekyll serve
 By default this will run a local server on port 4000: [http://127.0.0.1:4000](http://127.0.0.1:4000).
 
 
-## GitHub deployment
+### On GitHub
 
 To serve your website on GitHub you simply need to commit to master and push your changes to your GitHub repository, this will deploy to: [https://catana-research.github.io/](https://catana-research.github.io/).
 
 
+---
 
 ## Tweaking your site
 

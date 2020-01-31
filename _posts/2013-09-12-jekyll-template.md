@@ -1,8 +1,13 @@
 ---
-title: Jekyll Template
 layout: post
+title: Jekyll Template
+subtitle: Making a website with Jekyll and GitHub pages.
+photo: banner_700x420.jpg
+photo-alt: example cover photo
 icon: fa-lightbulb
 icon-style: regular
+categories: [Web]
+tags: [Jekyll]
 ---
 
 # General 
@@ -12,6 +17,10 @@ This is a template built on [Chris Bobbe's](https://github.com/chrisbobbe/jekyll
 # Front page
 
 You can edit content on the frontpage by editing the files in __\_sections__. This can be either HTML or markdown.
+
+# Variables
+
+https://jekyllrb.com/docs/variables/
 
 # Code
 
@@ -24,6 +33,15 @@ def main():
 
 <span class="image right"><img src="{{ 'assets/images/banner_2.jpg' | relative_url }}" alt="" /></span>
 ![My helpful screenshot](/assets/images/banner_2.jpg)
+
+
+## Anchors in markdown
+
+You can create an anchor by using the hyperlink markdown with the section name in hyphenated lower case. For example the anchor for this section is:
+
+```[my anchor text](#anchors-in-markdown)``` 
+
+Which will appear as: [my anchor text](#anchors-in-markdown).
 
 
 ## Image

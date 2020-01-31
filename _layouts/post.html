@@ -3,17 +3,29 @@ layout: default
 ---
 {%- include header.html -%}
 
+
 <!-- Main -->
 <div id="main">
 	<!-- Post -->
 	<article class="shade-two">
 	  <div class="container">
 			<header>
+{% capture image-dir %} /assets/images{{- page.path | relative_url | replace: '.md', '/' | replace: '_', '' -}} {% endcapture %}
+            
 				<h2>{{- page.title -}}</h2>
-                <h3>{% if page.subtitle %}{{- page.subtitle -}}{% endif %}</h3>
+                <h4>{% if page.subtitle %}{{- page.subtitle -}}{% endif %}</h4>
+               
 				<p>{% if page.author %}{{ page.author }}, {% endif %}{{- page.date | date_to_long_string -}}</p>
+                
+                <!-- Tags -->
+                <span>
+                {% for tag in page.tags %}
+                    <a href="/tag/{{ tag }}"><code class="highligher-rouge"><nobr>{{ tag }}</nobr></code>&nbsp;</a>
+                {% endfor %}
+                </span><br>
+                
                 {% if page.photo and page.photo-alt %}
-                        <img src="{{- page.photo | relative_url -}}" alt="{{- page.photo-alt -}}" class="back">
+                    <img src="{{image-dir}}{{- page.photo -}}" alt="{{- page.photo-alt -}}" class="back">
                 {% endif %}
 			</header>
 	    {{- content -}}
