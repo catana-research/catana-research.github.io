@@ -3,37 +3,58 @@ layout: default
 ---
 {%- assign _posts = site.posts | sort: 'date' | reverse -%}
 {%- include header.html scrolly_nav=_posts -%}
+
 <!-- Main -->
 <div id="main">
+ <div class="container" style="width:900px;font-weight: 400;color: #333;font-size: 18px;line-height: 22px;">
 	{%- if page.content != "" -%}
 		{%- include section.html title=page.title photo=page.cover-photo photo-alt=page.cover-photo-alt auto-header=page.auto-header content=page.content -%}
 	{%- endif -%}
+    
 	<!-- Posts List -->
 	{%- for _post in _posts -%}
+    
+        <h2>{{ _post.products_list }}</h2>
+    
+    
 		{%- capture _title -%}
-			<a href="{{- _post.url | absolute_url -}}">{{- _post.title -}}</a>
+			<a href="{{- _post.url | absolute_url -}}">{{- _post.title -}}</a> 
 		{%- endcapture -%}
-		{%- capture _subtitle -%}
-            {{- _post.subtitle -}}<br>
-			{% if _post.author -%}{{- _post.author }} | {% endif %}
-			{{- _post.date | date_to_long_string -}}<br>
-            <span>
+        
+        {%- capture _tags -%}
+            Tags: 
             {% for tag in _post.tags %}
-                <a href="/tag/{{ tag }}"><code class="highligher-rouge"><nobr>{{ tag }}</nobr></code>&nbsp;</a>
+                <a href="/tag/{{ tag }}"><code class="highligher-rouge"><nobr>{{ tag }}</nobr></code>&nbsp;</a> 
             {% endfor %}
-            </span>
 		{%- endcapture -%}
-		{%- capture _excerpt -%}<p>{{- _post.excerpt | strip_html | truncatewords: 100 -}}</p>{%- endcapture -%}
-		{%- capture _link -%}<a href="{{- _post.url | absolute_url -}}">read more</a>{%- endcapture -%}
+        
+        {%- capture _date -%}
+            {{- _post.date | date_to_long_string -}}
+        {%- endcapture -%}
+        
+		{%- capture _subtitle -%}
+            {{- _post.subtitle -}}
+			{% if _post.author -%}{{- _post.author }} | {% endif %}
+		{%- endcapture -%}
+        
+		{%- capture _excerpt -%}
+            <p>{{- _post.excerpt | strip_html | truncatewords: 100 -}} <a href="{{- _post.url | absolute_url -}}" style="text-align:right"> <i>read more</i></a></p>  
+        {%- endcapture -%}
+		{%- capture _link -%}
+            {{- _tags -}} 
+        {%- endcapture -%}
 		{%- assign _content = _excerpt | append: _link -%}
         
         
-        {% capture image-dir %} /assets/images{{- _post.path | relative_url | replace: '.md', '/' | replace: '_', '' -}}{{- _post.photo}} {% endcapture %}
-         {% capture image-dir %} /assets/images{{- _post.path | relative_url | replace: '.md', '/' | replace: '_', '' -}}{{- _post.photo}} {% endcapture %}
-        <h2>{{ image-dir }}</h2>
-        <img src="{{image-dir}}{{- _post.photo | relative_url  -}}" alt="{{- _post.photo-alt -}}" class="back">
-         {% capture photo-alt %}test{% endcapture %}
+        {% capture image-dir %} /assets/images{{- _post.path | relative_url | replace: '.html', '/'  | replace: '.md', '/' | replace: '_', '' -}}{{- _post.photo}} {% endcapture %}
         
-		{%- include section.html title=_title subtitle=_subtitle content=_content photo=image-dir photo-alt=photo-alt -%}
+        
+        <!-- <img src="{{image-dir}}{{- _post.photo | relative_url  -}}" alt="{{- _post.photo-alt -}}" class="back">-->
+        
+        {% capture photo-alt %}test{% endcapture %}
+		{%- include card.html title=_title date=_date subtitle=_subtitle content=_content photo=image-dir
+ photo-alt=photo-alt url=_post.url -%}
+ 
 	{%- endfor -%}
+</div>
 </div>

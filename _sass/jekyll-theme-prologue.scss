@@ -181,13 +181,14 @@
 
 	blockquote {
 		margin-left: 1em;
+		margin-bottom: 1em;
 		border-left: solid 0.5em #ddd;
 		padding: 1em 0 1em 2em;
 		font-style: italic;
 	}
 
 	p, ul, ol, dl, table {
-		margin-bottom: 2em;
+		margin-bottom: 1em;
 	}
 
 	dl {
@@ -269,12 +270,12 @@
 
 		&.left {
 			float: left;
-			margin: 0 2em 2em 0;
+			margin: 0 1em 1em 0;
 		}
 
 		&.right {
 			float: right;
-			margin: 0 0 2em 2em;
+			margin: 0 0 1em 1em;
 		}
 
 		&.centered {

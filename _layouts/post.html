@@ -5,18 +5,14 @@ layout: default
 
 
 <!-- Main -->
-<div id="main">
+<div id="main" style="margin:0 auto;width: 100%; max-width: 1200px;">
 	<!-- Post -->
-	<article class="shade-two">
-	  <div class="container">
+	<article class="" >
+    
+	  <div class="container" style="width:700px;font-weight: 400;color: #333;font-size: 18px;line-height: 22px;">
 			<header>
-{% capture image-dir %} /assets/images{{- page.path | relative_url | replace: '.md', '/' | replace: '_', '' -}} {% endcapture %}
+{% capture image-dir %} /assets/images{{- page.path | relative_url | replace: '.html', '/' | replace: '.md', '/' | replace: '_', '' -}} {% endcapture %}
             
-				<h2>{{- page.title -}}</h2>
-                <h4>{% if page.subtitle %}{{- page.subtitle -}}{% endif %}</h4>
-               
-				<p>{% if page.author %}{{ page.author }}, {% endif %}{{- page.date | date_to_long_string -}}</p>
-                
                 <!-- Tags -->
                 <span>
                 {% for tag in page.tags %}
@@ -24,11 +20,61 @@ layout: default
                 {% endfor %}
                 </span><br>
                 
+				<b><h2>{{- page.title -}} 
+                {% if page.subtitle %}: &nbsp;<i> {{- page.subtitle -}}</i>{% endif %}</h2></b>
+                
+				<p style="margin:0px 0 10px">{% if page.author %}{{ page.author }}, {% endif %}{{- page.date | date_to_long_string -}}</p>
+                        
                 {% if page.photo and page.photo-alt %}
                     <img src="{{image-dir}}{{- page.photo -}}" alt="{{- page.photo-alt -}}" class="back">
                 {% endif %}
 			</header>
-	    {{- content -}}
+            
+        <div id="content" style="margin:0">
+            {{- content -}}
+        </div>
 	  </div>
+      
+      
+ 
+    
+
+ <!-- Preview other posts -->
+ 
+<div id="preview" class="container" style="width:700px;font-weight: 400;color: #333;font-size: 18px;line-height: 22px;margin:5em auto;">
+<!-- Image -->
+<hr>
+<h2>Recent Posts</h2>
+
+<div class="row" style="margin: 0"> 
+
+{%- assign _posts = site.posts | sort: 'date' | reverse -%}
+{%- capture _title -%}
+    <a href="{{- _post.url | absolute_url -}}">{{- _post.title -}}</a> 
+{%- endcapture -%}
+
+
+{%- for _post in _posts -%}
+    {% if forloop.index < 4 %}
+    <div class="4u 12u$(mobile)" style="padding: 0 5px 0 0;">
+
+           {% capture image-dir %} /assets/images{{- _post.path | relative_url | replace: '.html', '/'  | replace: '.md', '/' | replace: '_', '' -}}{{- _post.photo}} {% endcapture %}
+        
+          
+            <div class="card item" style="margin:0;font-size: 28px;">
+                <a href="{{ _post.url }}" class="image fit"><img src="{{ image-dir }}" alt="{{ _post.cover-photo-alt }}" /></a>
+                <header style="text-align:left;">
+                    <h3><a href="{{- _post.url | absolute_url -}}">{{- _post.title -}}</a> </h3>
+                    <p style="margin:0px 0 10px">{% if page.author %}{{ page.author }}, {% endif %}{{- _post.date | date_to_long_string -}}</p>
+                </header>
+            </div>
+        
+    </div>
+    {% endif %}
+{%- endfor -%}
+</div>
+</div>
+
 	</article>
 </div>
+

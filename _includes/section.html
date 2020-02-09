@@ -8,6 +8,7 @@
 	content
 {%- endcomment -%}
 
+
 {%- assign _title = include.title | default: 'Untitled' -%}
 {%- assign _slug = include.title | strip_html | slugify | default: 'untitled' -%}
 

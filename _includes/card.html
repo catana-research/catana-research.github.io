@@ -1,0 +1,60 @@
+{%- comment -%}
+  Include vars:
+	title
+    date
+    subtitle
+	photo
+	photo-alt
+	auto-header
+	content
+    url
+{%- endcomment -%}
+
+
+{%- assign _title = include.title | default: 'Untitled' -%}
+{%- assign _slug = include.title | strip_html | slugify | default: 'untitled' -%}
+
+{%- if include.photo and include.photo-alt -%}
+	{%- capture _photo -%}
+        <img src="{{- include.photo | relative_url -}}" alt="{{- include.photo-alt -}}" class="image fit">
+	{%- endcapture -%}
+	{%- assign _class = 'shade-one  dark' -%}
+{%- else -%}
+	{%- assign _photo = '' -%}
+	{%- capture _class -%}shade-{%- cycle 'two', 'three', 'four', 'three' -%}{%- endcapture -%}
+{%- endif -%}
+
+{%- if include.auto-header == 'none' -%}
+	{%- assign _heading = "" -%}
+{%- else -%}
+	{%- capture _heading -%}
+		<header>
+        
+			<h2>
+        {%- if include.auto-header == null or include.auto-header == 'use-title' -%}
+          {{- _title -}}  {% if include.subtitle %}: &nbsp;<i> {{- include.subtitle -}}</i>{% endif %}
+        {%- else -%}
+          {{- include.auto-header -}}
+        {%- endif -%}
+        </h2>
+        {%- if include.date -%}
+            {{- include.date -}}
+        {%- endif -%}
+		</header>
+	{%- endcapture -%}
+{%- endif -%}
+
+
+<div class="card">
+  <div class="row">
+    <div class="4u 12u$(mobile)" style="padding:1em;">
+        <a href="{{ _post.url }}" class="image fit">
+         {{- _photo -}}
+         </a>
+    </div>
+    <div class="8u 12u$(mobile)" style="padding:1em;"> <!-- TODO: Max height -->
+        {{- _heading -}}
+        {{- include.content -}}
+    </div>
+  </div>
+</div>
