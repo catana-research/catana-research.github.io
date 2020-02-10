@@ -15,18 +15,21 @@ layout: default
             
                 <!-- Tags -->
                 <span>
+                
+        <a href="/category/{{- page.category[0] -}}" style="color:#1487c9; font-weight: bold;">{{- page.category -}}</a> &nbsp; | &nbsp;
                 {% for tag in page.tags %}
                     <a href="/tag/{{ tag }}"><code class="highligher-rouge"><nobr>{{ tag }}</nobr></code>&nbsp;</a>
                 {% endfor %}
                 </span><br>
                 
-				<b><h2>{{- page.title -}} 
-                {% if page.subtitle %}: &nbsp;<i> {{- page.subtitle -}}</i>{% endif %}</h2></b>
+                <!--Title-->
+				<h2 style="font-weight: bold;">{{- page.title -}} 
+                {% if page.subtitle %} <b>&nbsp;<i> {{- page.subtitle -}}</i></b>{% endif %}</h2>
                 
 				<p style="margin:0px 0 10px">{% if page.author %}{{ page.author }}, {% endif %}{{- page.date | date_to_long_string -}}</p>
                         
                 {% if page.photo and page.photo-alt %}
-                    <img src="{{image-dir}}{{- page.photo -}}" alt="{{- page.photo-alt -}}" class="back">
+                    <img src="{{image-dir}}{{- page.photo -}}" alt="{{- page.photo-alt -}}" class="image fit">
                 {% endif %}
 			</header>
             

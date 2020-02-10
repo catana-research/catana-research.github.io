@@ -1,12 +1,12 @@
 ---
 layout: post
 title: Jekyll Template
-subtitle: Making a website with Jekyll and GitHub pages.
+subtitle: Making a website with Jekyll and GitHub pages
 photo: banner_700x420.jpg
 photo-alt: example cover photo
 icon: fa-lightbulb
 icon-style: regular
-categories: [Web]
+category: [Web]
 tags: [Jekyll]
 ---
 

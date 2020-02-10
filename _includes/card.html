@@ -8,6 +8,8 @@
 	auto-header
 	content
     url
+    category
+    tags
 {%- endcomment -%}
 
 
@@ -28,31 +30,34 @@
 	{%- assign _heading = "" -%}
 {%- else -%}
 	{%- capture _heading -%}
-		<header>
+		<header style="margin:0">
         
-			<h2>
+            <a href="/category/{{ include.category }}" style="color:#1487c9; font-weight: bold;">{{- include.category -}}</a>  &nbsp; |  &nbsp; {{- include.tags -}}
+        
+        <h2 href="{{ include.url }}" style="font-weight: bold;font-size: 22px;">
         {%- if include.auto-header == null or include.auto-header == 'use-title' -%}
-          {{- _title -}}  {% if include.subtitle %}: &nbsp;<i> {{- include.subtitle -}}</i>{% endif %}
+          {{- _title -}}  
         {%- else -%}
           {{- include.auto-header -}}
         {%- endif -%}
+                {% if include.subtitle %}&nbsp;<b><i> {{- include.subtitle -}}</i></b>{% endif %}
         </h2>
         {%- if include.date -%}
-            {{- include.date -}}
+            <i>{{- include.date -}}</i>
         {%- endif -%}
 		</header>
 	{%- endcapture -%}
 {%- endif -%}
 
 
-<div class="card">
-  <div class="row">
+<div class="card" style="padding:0em;margin:1em;">
+  <div class="row" style="padding:0em;margin:0em;">
     <div class="4u 12u$(mobile)" style="padding:1em;">
         <a href="{{ _post.url }}" class="image fit">
          {{- _photo -}}
          </a>
     </div>
-    <div class="8u 12u$(mobile)" style="padding:1em;"> <!-- TODO: Max height -->
+    <div class="8u 12u$(mobile)" style="padding:1em;font-size: 16px;margin=0;">
         {{- _heading -}}
         {{- include.content -}}
     </div>

@@ -4,7 +4,7 @@ title: Jekyll and Hub
 subtitle: Making a website with Jekyll and GitHub pages
 photo: PlexusWire_3_2.jpg
 photo-alt: example cover photo
-categories: [Web]
+category: [Web]
 tags: [Jekyll, GitHub]
 ---
 
