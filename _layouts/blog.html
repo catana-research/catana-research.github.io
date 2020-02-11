@@ -54,7 +54,7 @@ layout: default
 		{%- assign _content = _excerpt | append: _link -%}
         
         
-        {% capture image-dir %} /assets/images{{- _post.path | relative_url | replace: '.html', '/'  | replace: '.md', '/' | replace: '_', '' -}}{{- _post.photo}} {% endcapture %}
+        {% capture image-dir %}/assets/images{{- _post.path | relative_url | replace: '.html', '/'  | replace: '.md', '/' | replace: '_', '' -}}{{- _post.photo}} {% endcapture %}
         
         
         <!-- <img src="{{image-dir}}{{- _post.photo | relative_url  -}}" alt="{{- _post.photo-alt -}}" class="back">-->
