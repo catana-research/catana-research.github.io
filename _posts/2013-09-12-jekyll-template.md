@@ -18,9 +18,18 @@ This is a template built on [Chris Bobbe's](https://github.com/chrisbobbe/jekyll
 
 You can edit content on the frontpage by editing the files in __\_sections__. This can be either HTML or markdown.
 
-# Variables
+# Jekyll variables
 
 https://jekyllrb.com/docs/variables/
+
+# Markdown
+
+[Read More](https://www.markdownguide.org/extended-syntax/)
+
+Definition List
+: Definition 1
+: Definition 2
+
 
 # Code
 

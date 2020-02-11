@@ -1,8 +1,7 @@
 ---
 title: Physics
-icon: fa-check
+icon:  None
 order: 5
-hide: True
 ---
 
 Particle physics.
