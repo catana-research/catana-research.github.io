@@ -1,0 +1,136 @@
+<p>Some notes on Blender rendering.</p>
+
+<hr />
+
+<h1 id="realtime-rendering">Realtime rendering</h1>
+
+<ol>
+  <li>Top Bar, third box, select ‘Cycles Render’</li>
+  <li>In bottom bar, next to ‘Object Mode’, click the white circle icon and select ‘Rendered’ in the viewport shading</li>
+  <li>In the Right bar under Render Select the device to GPU Compute to enable GPU rendering</li>
+</ol>
+
+<ul>
+  <li>Use planes with the emissive material as lamps instead of lamp</li>
+</ul>
+
+<p>Tab = Edit mode
+s = scale</p>
+
+<p>Enter edit mode and right click object, in left hand tool bar are options to apply to the object</p>
+
+<h1 id="make-a-fractal">Make a fractal</h1>
+
+<ul>
+  <li>Add a plane</li>
+  <li>Subdivide (Under Add) with number of cuts &gt; 1 and Fractal &gt; 0. Along Normal = 1 ensures that the distortions are only in the direction normal to the plane.
+https://docs.blender.org/manual/en/latest/modeling/meshes/editing/subdividing/subdivide.html</li>
+  <li>Can also Randomise afterwords (Mesh Tools) to make spikey structures.</li>
+</ul>
+
+<h1 id="selection">Selection</h1>
+<p>Use the circle tool (c), and click to select. You can change the size with the scroll wheel. Alternatively use box select (b)</p>
+
+<h1 id="shortcuts">Shortcuts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>key</th>
+      <th>action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>b</td>
+      <td>Draw box to select.</td>
+    </tr>
+    <tr>
+      <td>Numpad - 0</td>
+      <td>Move to camera view.</td>
+    </tr>
+    <tr>
+      <td>Shift-f</td>
+      <td>Move camera. Use WASD and shift to speed up.</td>
+    </tr>
+    <tr>
+      <td>Shift-A</td>
+      <td>Add object</td>
+    </tr>
+    <tr>
+      <td>Shift-d</td>
+      <td>Duplicate object</td>
+    </tr>
+    <tr>
+      <td>Shift-Z</td>
+      <td>Render preview</td>
+    </tr>
+    <tr>
+      <td>Esc</td>
+      <td>Exit render view</td>
+    </tr>
+    <tr>
+      <td>r - x - 180</td>
+      <td>Make selected object face directly down</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>#Materials
+Bottom Left bar Menu &gt; Node Editor
+Bottom bar, Add &gt; Shader &gt; Diffuse
+Hard plastic: https://blender.stackexchange.com/questions/61201/how-to-create-hard-plastic-material/61216
+Waxy plastic: https://blender.stackexchange.com/questions/53323/create-a-hard-plastic-material-node-setup-in-blender-and-a-bump-mapping/79015
+PBR - Principled shaders give most realistic results</p>
+
+<p>#Rendering
+Change quality In the right bar render menu under Sampling &gt; samples &gt; Render. Default = 128, more samples gives better results but takes longer.</p>
+
+<p>#Improve rendering performance
+In right bar render menu:</p>
+
+<ul>
+  <li>Light paths &gt; Min light bounces = 0, Max light bounces = 4</li>
+  <li>Perfomance &gt; Tile size = 256 x 256 (for GPU). If GPU usage is low for simple scenes, make as high as possible</li>
+  <li>Reduce samples if no improvement for higher samples</li>
+  <li>Enable no caustics</li>
+</ul>
+
+<h1 id="denoising">Denoising</h1>
+
+<ul>
+  <li>Improves performance by removing noise, reducing number of samples required for convergence. Can make image blurry, try with on and off.</li>
+  <li>Right bar -&gt; RenderLayers (next to render). go down to Denoising and tick the box.</li>
+</ul>
+
+<h1 id="replicate-results">Replicate results</h1>
+<p>Wax images : fractal3.blend &gt; 4k resolution &gt; 150 samples &gt; denoised = True. Rendering takes &lt; 30s
+Select Cycles Render (top bar) Hit Numpad-0 to select camera, shift-f to orient and then after selecting the view with left click, middle mouse, hit F12 to render, Esc to go back to 3d view. F3 to save the image.</p>
+
+<h2 id="particles">Particles</h2>
+
+<h2 id="particles-1">Particles</h2>
+
+<ul>
+  <li>Select object and go to the particles tab in the right menu and click new. Under the Render option set size = 1</li>
+  <li>Click play to see objects being emitted</li>
+  <li>Shift-A add forcefield, adjust strength etc by going to the physics tab in the right menu</li>
+  <li>Can turn off gravity of particles under the particles tab, Field Weights</li>
+</ul>
+
+<p>Under the Render tab in the particles tab:</p>
+<ul>
+  <li>To visualise halo particles, create a box that encloses the particles and add a material for the box. In the Node editor add Texture &gt; Point density and Shader &gt; emission</li>
+  <li>Alternatively, reder as Object and set the Dupli object to the chosen object.</li>
+</ul>
+
+<p>Refernces:</p>
+<ul>
+  <li>https://blender.stackexchange.com/questions/45481/halo-particles-dont-render-in-cycles</li>
+  <li>https://en.wikibooks.org/wiki/Blender_3D:_Noob_to_Pro/Particle_Systems</li>
+</ul>
+
+<h1 id="todo">Todo</h1>
+<ul>
+  <li>Particles: Photons = Glass, Energy = emissitivity, colour=Type</li>
+</ul>

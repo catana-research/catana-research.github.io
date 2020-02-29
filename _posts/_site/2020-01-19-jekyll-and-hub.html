@@ -1,0 +1,67 @@
+<p>Jekyll is a scripting language that enables you to quickly build webpages using markdown. Combined with <a href="https://pages.github.com">GitHub pages</a> you can develop and host your own custom website for free.</p>
+
+<p>In the following we will cover how to quickly setup and deploy your own website using Jekyll and GitHub.</p>
+
+<h3 id="initial-setup">Initial setup</h3>
+
+<p>Head over to GitHub and create a new repository named <em>username.github.io</em>, where <em>username</em> is your GitHub username (or organization name) on GitHub. If not already enabled, also make sure your account is setup to use <a href="https://pages.github.com">GitHub pages</a>.</p>
+
+<p>Next, make a clone of the template repo:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/catana-research/catana-research.github.io.git
+</code></pre></div></div>
+<p>This will be a good base for your website which you can tweak later <a href="#tweaking-your-site">(see below)</a>.</p>
+
+<p>Rename the old <em>origin</em> to <em>source</em> to enable pulling from the template repo and add your own repo:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git remote rename origin <span class="nb">source
+</span>git remote add origin https://github.com/catana-research/catana-research.github.io.git
+</code></pre></div></div>
+
+<h3 id="deploying-the-site">Deploying the site</h3>
+
+<p>Before you can view your site you must first deploy it. This can either be done on your own machine <em>locally</em> or served to the world using <em>GitHub</em>.</p>
+
+<h4 id="locally">Locally</h4>
+
+<p>With Jekyll you can easily deploying your website to your local machine, enabling you to quickly make and review changes before deploying to the web. Before deploying locally you must first install the packages for the the website. To do this, open a command prompt in the directory root and install the required website packages with:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bundle <span class="nb">install</span>
+</code></pre></div></div>
+
+<p>You will need to do this when you want to install new packages for your site.</p>
+
+<p>You can then serve your site to your local machine with the command:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bundle <span class="nb">exec </span>jekyll serve
+</code></pre></div></div>
+
+<p>By default this will run a local server on port 4000: <a href="http://127.0.0.1:4000">http://127.0.0.1:4000</a>.</p>
+
+<h4 id="github">GitHub</h4>
+
+<p>To serve your website on GitHub you simply need to commit to master and push your changes to your GitHub repository, this will deploy to: <a href="https://catana-research.github.io/">https://catana-research.github.io/</a>.</p>
+
+<h3 id="tweaking-your-site">Tweaking your site</h3>
+
+<p>Customise  _config.yml to edit the theme</p>
+
+<h4 id="code-formating">Code formating</h4>
+
+<p>The site uses rouge for code syntax highlighting, using the <em>monokai</em> theme. You can generate a style for your favourate colour scheme by:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rougify style monokai <span class="o">&gt;</span> assets/css/syntax.css
+</code></pre></div></div>
+
+<p>If you want to <a href="https://bnhr.xyz/2017/03/25/add-syntax-highlighting-to-your-jekyll-site-with-rouge.html">read more</a>.</p>
+
+<h2 id="summary">Summary</h2>
+
+<p>By now you should know how to create and deploy your own website for free.</p>
+
+<h4 id="further-reading">Further reading</h4>
+
+<ul>
+  <li><a href="https://devhints.io/jekyll">Jekyll cheatsheet</a>.</li>
+  <li><a href="https://jekyllrb.com/docs/variables/">Jekyll variables</a>.</li>
+  <li><a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">Markdown cheatsheet</a>.</li>
+</ul>
+
