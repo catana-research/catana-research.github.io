@@ -13,7 +13,7 @@ TensorFlow is popular in the machine learning sphere for providing a powerful fr
 
 ### Restricting VRAM usage
 
-By default TensorFlow will allocate all video memory when executing a calculation which can be problematic if you are trying to share the same GPU resource across multiple simulataneous calculations. You can however request that only the required amount of memory is allocated and allow growth as required. As explained in the [documentation](https://www.tensorflow.org/guide/gpu#limiting_gpu_memory_growth) this can be achieved by the following:
+By default TensorFlow will allocate all video memory when executing a calculation which can be problematic if you are trying to share the same GPU resource across multiple simultaneous calculations. You can however request that only the required amount of memory is allocated and allow growth as required. As explained in the [documentation](https://www.tensorflow.org/guide/gpu#limiting_gpu_memory_growth) this can be achieved by the following:
 
 ```
 gpu_devices = tf.config.experimental.list_physical_devices('GPU')
