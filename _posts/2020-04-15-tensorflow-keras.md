@@ -2,7 +2,7 @@
 layout: post
 title: Keras TensorFlow
 subtitle: 
-photo: red-lights-in-line-on-black-surface-158826.jpg
+photo: shapes-and-pattern-2346594.jpg
 photo-alt: Keras, TensorFlow
 tags: [Keras, TensorFlow, Python]
 category: [Analysis]
