@@ -42,6 +42,17 @@ f(x) = \sum c_{i} T_{i}(x)
 
 Chebyshev interpolants can be computed by the barcentric formula in a numerically stable way in linear time.
 
+Interpolation works best for functions that can be expressed in an analytical mathematical expression. Functions that are 
+a product of approximate calculations or Monte Carlo may exhibit noise which the interpolating function will also fit, 
+degrading accuracy.
+
+Weierstrass approximation theorem:
+
+>>>    Every continuous function on a bounded interval can be approximated to arbitrary accuracy by polynomials.
+Let f be a continuous function on [−1, 1], and let ε > 0 be arbitrary. Then there exists a
+polynomial p such that
+kf − pk < ε
+
 ## Lagrange polynomials
 
 http://terpconnect.umd.edu/~petersd/460/interp460.pdf
