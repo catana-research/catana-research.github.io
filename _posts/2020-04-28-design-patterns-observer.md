@@ -4,7 +4,7 @@ title: Design patterns
 subtitle: Observer
 photo: black-binocular-on-round-device-63901.jpg
 photo-alt: Observer
-tags: [Design patterns, Python]
+tags: [DesignPatterns, Python]
 category: [Systems]
 ---
 

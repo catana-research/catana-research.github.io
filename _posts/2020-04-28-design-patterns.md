@@ -4,7 +4,7 @@ title: Design patterns
 subtitle: An introduction
 photo: red-glittered-wallpaper-751373.jpg
 photo-alt: Design patterns
-tags: [Design patterns, Python]
+tags: [DesignPatterns, Python]
 category: [Systems]
 ---
 

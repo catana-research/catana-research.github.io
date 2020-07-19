@@ -4,7 +4,7 @@ title: Design patterns
 subtitle: Factory Method
 photo: business-equipment-factory-industrial-plant-357440.jpg
 photo-alt: Factory Method
-tags: [Design patterns, Python]
+tags: [DesignPatterns, Python]
 category: [Systems]
 ---
 

@@ -4,7 +4,7 @@ title: Design patterns
 subtitle: Strategy pattern
 photo: black-and-white-chess-pieces-on-chess-board-1762815.jpg
 photo-alt: Strategy pattern
-tags: [Design patterns, Python]
+tags: [DesignPatterns, Python]
 category: [Systems]
 ---
 

@@ -4,7 +4,7 @@ title: Design patterns
 subtitle: Template method
 photo: pattern-metal-pipes-grid-35543.jpg
 photo-alt: Template
-tags: [Design patterns, Python]
+tags: [DesignPatterns, Python]
 category: [Systems]
 ---
 

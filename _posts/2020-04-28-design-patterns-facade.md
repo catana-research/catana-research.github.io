@@ -4,7 +4,7 @@ title: Design patterns
 subtitle: Facade
 photo: abandoned-architecture-colorful-construction-277509.jpg
 photo-alt: Facade
-tags: [Design patterns, Python]
+tags: [DesignPatterns, Python]
 category: [Systems]
 ---
 

@@ -4,7 +4,7 @@ title: Design patterns
 subtitle: Singleton
 photo: background-beautiful-blossom-calm-waters-268533.jpg
 photo-alt: Singleton
-tags: [Design patterns, Python]
+tags: [DesignPatterns, Python]
 category: [Systems]
 ---
 

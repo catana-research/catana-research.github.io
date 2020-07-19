@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Bootstrap
-subtitle: Estimating errors for data
+subtitle: Estimating errors from data
 photo: closeup-photo-of-brown-lace-up-boot-936361.jpg
 photo-alt: Bootstrap
 tags: [Bootstrap, Python]

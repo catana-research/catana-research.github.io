@@ -4,7 +4,7 @@ title: Design patterns
 subtitle: Builder
 photo: photo-of-people-on-building-under-construction-1117452.jpg
 photo-alt: Builder
-tags: [Design patterns, Python]
+tags: [DesignPatterns, Python]
 category: [Systems]
 ---
 
