@@ -13,10 +13,17 @@ TensorFlow is popular in the machine learning sphere for providing a powerful fr
 
 ### The Keras API
 
-Keras is a high-level API that enables users to use a variety of machine learning backends with a common, clean interface. This provided a popular interface to quickly building TensorFlow models without having to get dirty in the low-level API of TensorFlow. With the release of TensorFlow v2 Keras has now been incorporated as a native high-level API accessible. For existing users of Keras, it is [recommended they use the new `tf.keras` interface](https://twitter.com/fchollet/status/1174018651449544704?s=19), as new developments with not be ported back to Keras.
+Keras is a high-level API that enables users to use a variety of machine learning backends with a common, clean interface. This provided a popular interface to quickly building TensorFlow models without having to get dirty in its low-level API. With the release of TensorFlow v2 Keras has now been incorporated as a native high-level API. Existing users of Keras, are [recommended to use the new `tf.keras` interface](https://twitter.com/fchollet/status/1174018651449544704?s=19), as new developments with not be ported back to Keras.
 
 ```
 tensor
 ```
 
 
+## Parameters
+
+
+### Compile
+
+- `optimizer`: Function used in gradient descent.
+- `loss`: 
