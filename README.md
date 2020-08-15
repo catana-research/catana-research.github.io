@@ -8,6 +8,12 @@ This is Prologue, a simple, single page responsive site template from [HTML5 UP]
 
 **Demo**: https://chrisbobbe.github.io/jekyll-theme-prologue/
 
+
+# Process
+
+- Add a post to _posts/POST_NAME
+- Add images to assets/images/POST_NAME
+
 # Added Features
 
 * **Blogging and multi-page features you expect from Jekyll**
