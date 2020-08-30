@@ -1,26 +1,16 @@
 ---
 layout: post
 title: Optimisation
-subtitle: PCA, t-SNE
+subtitle: 
 photo: gray-concrete-post-tunnel-1531677.jpg
 photo-alt: Clustering data
-tags: [Optimisation, Python]
-category: [Analysis]
+tags: [Python]
+category: [Optimisation]
 ---
 
+Ensuring optimal code execution is a prime consideration for many projects where inefficient code can lead to long processing times or high hardware loads. The process of optimisation is therefore an important component of the development process which can in some cases reduce computational requirements by orders of magnitude resulting in significant cost savings.
 
-
-## Optimisation techniques
-
-Main methods to improve the performance of a program:
-0. Analysis of bottlenecks
-1. Improve the performance of code and systems
-2. Improve the algorithms utilised
-3. Remove redundant calculations
-4. Approximate calculations
-5. Validate code changes and performance 
-
-This is an iterative process and can be repeated until the desired performance is reached.
+This series will explore common optimisation techniques with an emphasis on Python development.
 
 
 ### Analysis of bottlenecks
@@ -30,18 +20,18 @@ ascertained. There is little point in spending effort in optimising a component 
 the overall performance of the code.
 
 The first step before any optimisation should therefore be a top down analysis of the current performance of the code. 
-This enables optimisations to be targeted at the components that have the greatest impact and determine which optimisations 
+This ensures optimisations target components that have the greatest impact and helps determine which types of optimisations 
 are applicable.
  
 Care should be taken to measure the performance of a representative sample of the code. A component that runs slower but 
-fewer times can have a smaller impacter than a faster component that is run multiple times. 
+fewer times can have a smaller impact than a faster component that is run multiple times. 
 
-The type of performance issue should also be noted. If the calculation is IO bound then improving reducing the data transfer or improving data transfer 
+The type of performance issue should also be considered. If the calculation is IO-bound then improving reducing the data transfer or improving data transfer 
 rates is most effective. If a calculation is CPU bound then improving the processing efficiency is more effective. If 
  optimisations are wrongly targeted the improvement in performance will be smaller or negligible.
     
 
-Timing performed with profiler or timing loops.
+Timing can be performed with a profiler, such as `cprofile`, by timing blocks of code or from an analysis of system logs.
  
 When you have 
 
@@ -50,8 +40,8 @@ When you have
 
 One method of improving performance is to increase the efficiency of existing code. This leaves the algorithm   
 
-Where possible 
-- Numpy
+Where possible use:
+- [Numpy]()
 - Numba, Cython
 - C++ or low level language for CPU intensive calculations
 
@@ -62,7 +52,7 @@ System optimisations:
 - Using faster disk storage (SSD)
 - Using more processing power (multithreading if parallelisable)
 
-Multithreading can be powerful for embarrasingly parallisable problems and there exist frameworks, such as dask distributed, 
+Multithreading can be powerful for embarrassingly parallisable problems and there exist frameworks, such as dask distributed, 
 that makes multithreading of code easy without major code changes. For more complex problems however the issues associated 
 with multithreading such as race conditions and thread locks can be more trouble than they are worth. Most grid infrastructure 
 also performs better with distributed single threaded programs.  
@@ -77,7 +67,7 @@ E.g. binary search, m-map
 
 ### Remove redundant calculations
 
-Paradoxicly, one of the most effective methods at optimising calculations is not to perform the calculation in the first 
+Paradoxically, one of the most effective methods at optimising calculations is not to perform the calculation in the first 
 place. Being smarter in your algorithm through caching of intermediate results or removing redundant operations has one
 of the greatest capabilities to improve performance.
 
@@ -94,3 +84,16 @@ Check result against original code for a sufficient breadth of test input data.
 It is important that any code changes made during the optimisation process are captured in the testing suite. By incorporating 
 new unit and regression tests, any new edge cases that may have been introduced can be monitored.  
  
+ 
+## Optimisation workflow
+
+In summary, the main methods to improve the performance of a program are:
+0. Analysis of bottlenecks
+1. Improve the performance of code and systems
+2. Improve the algorithms utilised
+3. Remove redundant calculations
+4. Approximate calculations
+5. Validate code changes and performance 
+
+This is an iterative process and can be repeated until the desired performance is reached.
+

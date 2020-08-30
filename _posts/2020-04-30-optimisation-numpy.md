@@ -5,7 +5,7 @@ subtitle: Numerical computing in Python
 photo: photo-of-cave-rock-formation-2537642.jpg
 photo-alt: Clustering data
 tags: [Numpy, Python]
-category: [Analysis]
+category: [Optimisation]
 ---
 
 Numpy enables calculations in Python to be efficiently performed by executing calculations using precompiled libraries written in C++.
