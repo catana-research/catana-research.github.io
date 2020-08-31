@@ -1,44 +1,56 @@
 ---
 layout: post
 title: Optimisation
-subtitle: 
+subtitle: Improving execution performance
 photo: gray-concrete-post-tunnel-1531677.jpg
-photo-alt: Clustering data
+photo-alt: Optimisation
 tags: [Python]
 category: [Optimisation]
 ---
 
 Ensuring optimal code execution is a prime consideration for many projects where inefficient code can lead to long processing times or high hardware loads. The process of optimisation is therefore an important component of the development process which can in some cases reduce computational requirements by orders of magnitude resulting in significant cost savings.
 
-This series will explore common optimisation techniques with an emphasis on Python development.
+This series will explore common development optimisation techniques with an emphasis on Python development.
 
+
+## Optimisation prerequisities
 
 ### Analysis of bottlenecks
 
-Before starting any optimisations an assessment of the bottlenecks and performance issues of the program should first be
-ascertained. There is little point in spending effort in optimising a component of the code that has little bearing on 
-the overall performance of the code.
+Before starting any optimisations, an assessment of the bottlenecks and performance issues of the program should first be ascertained. There is little point in spending effort in optimising a component that has little bearing on the overall performance of the code.
 
-The first step before any optimisation should therefore be a top down analysis of the current performance of the code. 
-This ensures optimisations target components that have the greatest impact and helps determine which types of optimisations 
-are applicable.
- 
-Care should be taken to measure the performance of a representative sample of the code. A component that runs slower but 
-fewer times can have a smaller impact than a faster component that is run multiple times. 
+A top-down analysis of the current performance of the code should therefore be performed prior to any optimisation. This helps to determine which types of optimisations are applicable. The performance impact of an inappropriate optimisation will often be small and add undue complexity making maintenance more difficult. For example if the calculation is IO-bound (the CPU is often idle and disk or network is busy) then reducing the data footprint or improving data transfer rate would be most effective solution. Conversely, if a calculation is fully utilising the CPU-bound (busy CPU and low disk or network utilisation) then improving the processing efficiency is more effective. 
 
-The type of performance issue should also be considered. If the calculation is IO-bound then improving reducing the data transfer or improving data transfer 
-rates is most effective. If a calculation is CPU bound then improving the processing efficiency is more effective. If 
- optimisations are wrongly targeted the improvement in performance will be smaller or negligible.
-    
+Optimisations should target components of greatest impact and stop where the trade-off between speed and maintainability becomes an issue. Often the largest impact is to be found in the big loops of an application, where a small slowdown is amplified by each iteration, or in the compute or IO heavy parts of the code which stretch the hardware to its limits. There is little point in optimising a process that takes a few seconds or minutes if the slowest component takes hours, as this adds more to the code complexity that have developers to understand and maintain, potentially causing more problems than it solves.    
 
-Timing can be performed with a profiler, such as `cprofile`, by timing blocks of code or from an analysis of system logs.
+### Quantifying performance
+
+Depending on the 
+
+Choose a profiler appropriate to your need, `cprofile` measures the CPU time, if you are more interested in wall clock time there are other other profilers. 
+
+Timing can be performed with a profiler, such as `cprofile` which comes with the Python distribution, by timing blocks of code or from an analysis of system logs. IDEs with `iPython` support have in addition magics such as `%timeit` and `%prun` that can also be used for this purpose.
  
 When you have 
 
 
-### Improving performance of the code
+Care should be taken to measure the performance of a representative execution of the code. A component that runs slower but fewer times can have a smaller impact than a faster component that is called multiple times. 
 
-One method of improving performance is to increase the efficiency of existing code. This leaves the algorithm   
+
+
+![snakeviz profile](..\assets\images\posts\2020-04-30-optimisation\snakeviz_profile.png)
+
+
+### Benchmarks and testing
+
+Prior to performing any optimisations, a comprehensive test uite should first be in place. This ensures that any code changes or refactoring does not change the operation in an unintended 
+
+## Optimisation
+
+### Improving code performance
+
+After identifying the bottlenecks in the program a good starting point is 
+One method of improving performance is to increase the underlying efficiency of existing code which changes to the algorithm.   
 
 Where possible use:
 - [Numpy]()
@@ -59,7 +71,7 @@ also performs better with distributed single threaded programs.
 
  
 
-### Improve the algorithms utilised
+### Improving the algorithm
 
 Solution implementations can often be naive, working well for low data volumes but scaling poorly. A lot of research has 
 been conducted into the best methods of solving a variety of problems and it is unlikely you will be able to better them. 
