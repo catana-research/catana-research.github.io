@@ -3,12 +3,12 @@ layout: post
 title: Numpy
 subtitle: Numerical computing in Python
 photo: photo-of-cave-rock-formation-2537642.jpg
-photo-alt: Clustering data
+photo-alt: Numpy
 tags: [Numpy, Python]
 category: [Optimisation]
 ---
 
-*Numpy* is an extremely popular Python library for scientific and high-performance applications, that enables calculations in Python to be efficiently performed by executing calculations using precompiled libraries written in C++. The [API](https://numpy.org/doc/1.19/reference/index.html) is extensive and well-documented, making it easy to subsitute Python opertions with more efficient operations in Numpy.
+*Numpy* is an extremely popular Python library for scientific and high-performance applications, that enables calculations in Python to be efficiently performed by executing calculations using precompiled libraries written in C/C++ and Fortran. The [API](https://numpy.org/doc/1.19/reference/index.html) is extensive and well-documented, making it easy to substitute Python operations with the more efficient operations of Numpy.
 
 
 ## The `nd.array`
@@ -17,17 +17,21 @@ The underlying array data structure of Numpy is the `nd.array`, a multidimension
 
 The `nd.array` instance and its slices are views of the underlying data location and can be passed around efficiently. When using multiple views care should be taken, as changes to any object referencing to this data will affect all other `nd.array` objects. If you wish to keep the arrays separate the `.copy` operator can be used.
 
-
-By default the array is row-major ordered, making iteration of row data very efficient. If this is not the desired behaviour you can specify column-major 'Fortran' order using the `order='F'` kwarg.
-
+By default, the array is row-major ordered, making iteration of row data very efficient. If this is not the desired behaviour you can specify column-major 'Fortran' order using the `order='F'` kwarg.
 
 
+Where possible, preallocate arrays of the correct size. The fastest way to do this is to use `np.empty`, which pre-allocates without initialisation an array of the specified datatype. For instance an `ndarray` of 10 64-bit floating-point numbers can be quickly allocated by:
+```python
+np.empty(10, dtype=np.float64)
+```
+If having elements of the array left uninitialised makes you uncomfortable you can alternatively use `np.full` which also initialises a default value, in this example we set all elements to zero:
+```python
+np.full(10, 0., dtype=np.float64)
+```
+This comes with a performance hit, with the allocation of an array of a million floats taking 20 times longer for `np.full`.
 
-Set `dtype` to an approriate
 
-Where possible, preallocate arrays of the correct size
-
-It is prefable to use Numpy functionality and data types instead of Python where possible, using `nd.array` instead of `list`. For instance, when determining the unique elements of a list it is 5x slower to use the following Python call: 
+It is preferable to use Numpy functionality and data types instead of Python where possible, using `nd.array` instead of `list`. For instance, when determining the unique elements of a list it is 5x slower to use the following Python call: 
 ```python
 unique_elemenst = list(set(x))
 ```

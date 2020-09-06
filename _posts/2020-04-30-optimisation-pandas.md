@@ -63,20 +63,93 @@ memory usage: 6.1+ MB
 
 ### Data lookups
 
-A common task with Pandas objects is to search for a particular entry or set of entries. The API provides a simple way of performing this operation using the 
+A common task with Pandas objects is to search for a particular entry or set of entries. The API provides a simple way of performing this operation using the `__getitem__` operator `[]`, for example a common method to determine the price for the listing with `id=3309` would be:
+```python
+listings[listings['id'] == 3309]['price'] 
+```
+Timing this operation we find this takes a little over a millisecond:
+```python
+1.56 ms ± 23.6 µs per loop (mean ± std. dev. of 7 runs, 1000 loops each)
+```
+This might seem small but in a loop where there are multiple lookups this can quickly add up. We can improve performance by setting the index to the `id` column and using the `loc` operator:
+```python
+listings.loc[3]['price']
+```
+Which is 6x faster:
+```python
+253 µs ± 30.9 µs per loop (mean ± std. dev. of 7 runs, 1000 loops each)
+```
+This however is still has an inefficiency as it includes a redundant intermediate step where the data is returned as a DataFrame object after selection. To avoid this you should always include the column name(s) during the operation to ensure this is handled internally:
+```python
+listings.loc[3, 'price']
+```
+Which is over 171x faster than the original solution:
+```python
+9.1 µs ± 310 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
+```
+The `loc` operator is useful as it can return single or multiple values for a selection. If however you only need a single return value (a scalar) the `at` operator can be used:
+```python
+listings.at[3, 'price']
+```
+Which is 290x faster than the original solution:
+```python
+5.38 µs ± 70.3 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
+```
+In summary, when accessing data where possible filter on the index using `loc` or `at` and ensure that the returned columns are specified within the call.
 
 
+### Looping over data
 
-### Filter and memory
 
+Avoid `iterrows`, it's almost always a terrible solution. 
 
+`vectorize` operations will normally provide the best performance.
+
+If you have to apply a bespoke function `apply` can be fast.
+
+Alternatively it might be worth revaluting the problem as a problem of joining to tables together, as `merge` is extremely efficient.
 
 ### Inplace
 
 
+### Processing large datasets
+
+https://pandas.pydata.org/pandas-docs/stable/user_guide/scale.html
+
+When using large datasets your may experience a decrease in performance and increase in memory.
+
+
+listings.info(memory_usage='deep')
+
+Reduce the data that is loaded and filter early.
+
+Formats like `parquet` enable you to selectively load which data columns you need, `csv` will always load all the data.
+
+Use space efficient dataformats. Pandas will use the largest dataformat available for each column. `csv` does not store the datatype so Pandas will assign a type that is compatible. `parquet` enables you to specify the datatype reducing space and memory utilisation.  
+
+Split data from a monolithic block into smaller chunks. This enables IO and CPU utilisation to be balanced and makes it easier to use multithreaded processes, such as Dask.
+
+
+### Dask
+
+Dask is a framework that enables distributed computing.
+
+Dask dataframe provides the same API for the majority of Pandas functionality however in a *lazy* way.
+
+```python
+import dask.dataframe as dd
+ddf = dd.read_parquet("data/timeseries/ts*.parquet", engine="pyarrow")
+ddf
+```
+
+Dask has some additional overhead than Pandas, so if the data is small enough to fit in memory its often better to use Pandas.  
+
+
 ### Numba
 
-If your code is spending a long time getting and setting Pandas objects it might be worth considering Numba.
+If an analysis of a profiling of your code shows it is spending a long time getting and setting Pandas objects it might be worth considering Numba. 
+
+
 
 - Never pass Pandas or Python datatypes to Numba or Cython optimised functions. Instead use pass an `np.ndarray` using the `.to_numpy()` operator (use of `.values` is being deprecated). 
 - If you are unsure whether the objects you are passing to numba are in a no Python format you can specify `nopython=True` in the decorator. This ensures numba runs without Python objects and if there are any such objects they can be easily identified as they will throw an error during execution.

@@ -13,6 +13,8 @@ Ensuring optimal code execution is a prime consideration for many projects where
 This series will explore common development optimisation techniques with an emphasis on Python development.
 
 
+
+
 ## Optimisation prerequisities
 
 ### Analysis of bottlenecks
@@ -43,9 +45,17 @@ Care should be taken to measure the performance of a representative execution of
 
 ### Benchmarks and testing
 
-Prior to performing any optimisations, a comprehensive test uite should first be in place. This ensures that any code changes or refactoring does not change the operation in an unintended 
+Prior to performing any optimisations, a comprehensive test suite should first be in place. This ensures that any code changes or refactoring does not change the operation in an unintended changes.
+
+Additionally, the current performance should be benchmarked in order to measure how much faster a change is. You may find that sometimes an optimisation leads to worse performance so it is important to monitor and ensure it is behaving as expected. 
+
+
+### Milliseconds count
+
+It may seem that shaving a few milliseconds off a function call is a minor thing but when processing large amounts of data it can quickly add up. A saving of 1 millisecond per loop over a million dataentries for example adds over 15 minutes to the runtime.  
 
 ## Optimisation
+
 
 ### Improving code performance
 
