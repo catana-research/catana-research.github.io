@@ -45,6 +45,15 @@ unique_elemenst = np.unique(x)
 
 Vectorization is extremely powerful in Numpy as it enables code to not only be written in a compact way but also greatly improves performance by removing Python loops. 
 
+## Efficienct looping 
+
+By default Numpy arrays are row-ordered, with contiguous memory across the highest dimension. It is therefore more efficient to iterate over the highest dimension than lower dimensions:
+
+```python
+arr[:, 0]  # Is inefficient
+arr[0, :]  # Is efficient
+```
+
 ## `ufunc`
 
 

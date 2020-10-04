@@ -46,7 +46,7 @@ The majority of time spent in development lifecycle is the maintenance of existi
 
 ## Continuous integration
 
-A core part of a agile development process is the use of continous integration systems to   
+A core part of a agile development process is the use of continuous integration systems to   
 
 - Jenkins, Travis CI
 
