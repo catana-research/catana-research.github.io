@@ -8,18 +8,16 @@ tags: [DesignPatterns, Python]
 category: [Systems]
 ---
 
-There are several different patterns that implement a factory from the simple factory pattern to the more complex abstract factory. In the following we focus on the factory method pattern which lies in the middle in terms of complexity.
+The factory method pattern is useful for situations that requires the creation of many different types of objects, all derived from a common base type. The pattern defines a method for the creation of objects, which factory subclasses can then override to specify the derived type that will be created. This enables the factory method to dynamically create at runtime a new object from a simple descriptor, such as an enum or a string. 
 
-The factory method pattern is useful in a situation that requires the creation of many different types of objects, all derived from a common base type. The pattern defines a method for creating objects, which factory subclasses can then override to specify the derived type that will be created. Therefore the Factory Method can create at runtime a new object from a descriptor, such as an enum or a string. 
- 
+There are several different factory patterns ranging from the simple factory pattern to the more complex abstract factory. In the following we focus on the **factory method pattern** which lies in the middle in terms of complexity.
 
 ## Pattern design
-
-Summary: *A utility class that dynamically creates an instance of a class at runtime from a family of derived classes.*
-
-Problem: We want to decide at runtime what object is to be created based on some configuration or application parameter. When we write the code, we do not know what class should be instantiated.
-
-Solution: Define an interface for creating an object, but let subclasses decide which class to instantiate. Factory Method lets a class defer instantiation to subclasses.
+|||
+|---|---|
+|**Summary:**|A utility class that dynamically creates an instance of a class at runtime from a family of derived classes.|
+|**Problem:**| We want to decide at runtime what object is to be created based on some configuration or application parameter. When we write the code, we do not know what class should be instantiated.|
+|**Solution:**| Define an interface for creating an object, but let subclasses decide which class to instantiate. Factory Method lets a class defer instantiation to subclasses.|
 
 
 There four components required for a factory method pattern, two for the factory referred to as a `creator` and two for the object being created referred to as the `product`:

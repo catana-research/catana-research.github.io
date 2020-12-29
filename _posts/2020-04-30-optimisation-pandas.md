@@ -18,7 +18,7 @@ In the following we will explore optimisation of Pandas operations on the `listi
 
 ### Dataset inspection 
 
-Before optimising, it is good to understand the underlying data to indentify where slowdowns may arise.
+Before optimising, it is good to understand the underlying data to identify where slowdowns may arise.
 
 Looking at the two DataFrames using the `.info()` operator we see they are both reasonably large.
 
@@ -61,6 +61,67 @@ memory usage: 6.1+ MB
 ```
 
 
+### Datatypes
+
+Sometimes performance can be improved by changing the underlying datatype being stored.
+
+
+#### Categorical data
+
+If your data contains commonly repeated data in categories, it may be worth storing the data as [categorical](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Categorical.html). In which case Pandas stores data as one of a fixed number of categories, greatly reducing storage requirements and computionations.
+
+Consider a portfolio that contains one million trades of a range of credit ratings: 
+    ```
+    ratings = pd.DataFrame(data={"Data": np.random.choice(["AAA", "AA", "A", "BBB", "BB", "B", "C", "D"], 1000000)})
+    ```
+
+If we want to extract only trades that are in the default state:
+```
+    # 60.407 ms
+    with Timer():
+        ratings[ratings["Data"] == "D"]
+```
+
+We can make this a bit faster using numpy:
+```
+    #  25.969 ms
+    with Timer():
+        ratings[ratings["Data"].to_numpy() == "D"]
+```
+
+It's easy to convert existing data to categories with the `astype` method:
+```
+    ratings_cat = ratings.copy()
+    ratings_cat["Data"] = ratings["Data"].astype("category")
+```
+The categories can be accessed by:
+```python
+>>> ratings_cat["Data"].cat.categories
+Index(['A', 'AA', 'AAA', 'B', 'BB', 'BBB', 'C', 'D'], dtype='object')
+```
+The size of the DataFrame is now 7.8x smaller (977.1 KB vs 7.6 MB) and doing the selection with Pandas is now much faster:
+```
+# 6.793 ms
+ratings_cat[ratings_cat["Data"] == 'D']
+```
+
+Be careful however as a naive cast to numpy actually slower. This is because the data is being cast back to a string type: 
+```
+# 35.147 ms
+ratings_cat[ratings_cat["Data"].to_numpy() == 'D']
+>> ratings_cat["Data"].to_numpy()
+array(['BB', 'AAA', 'BBB', ..., 'D', 'AAA', 'D'], dtype=object)
+```
+
+Using the category codes we get the same performance as the native Pandas categorical selection:
+```
+# 6.493 ms
+ratings_cat[ratings_cat["Data"].cat.codes.to_numpy() == ratings_cat["Data"].cat.categories.get_loc('D')]
+``` 
+*Summary:* The Categorical datatype is useful if you have data that conforms to common categories, not only improving computational performance, but also reducing memory utilisation. Be careful to check that your optimisation performs as you expect and is not performing an intermediate transformation.
+
+
+
 ### Data lookups
 
 A common task with Pandas objects is to search for a particular entry or set of entries. The API provides a simple way of performing this operation using the `__getitem__` operator `[]`, for example a common method to determine the price for the listing with `id=3309` would be:
@@ -87,7 +148,7 @@ Which is over 171x faster than the original solution:
 ```python
 9.1 µs ± 310 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
 ```
-The `loc` operator is useful as it can return single or multiple values for a selection. If however you only need a single return value (a scalar) the `at` operator can be used:
+The `loc` operator is useful as it can return single or multiple values for a selection. If however you only need a single return value (a scalar) the `at` operator can be used to further speed up the operation:
 ```python
 listings.at[3, 'price']
 ```
@@ -97,17 +158,48 @@ Which is 290x faster than the original solution:
 ```
 In summary, when accessing data where possible filter on the index using `loc` or `at` and ensure that the returned columns are specified within the call.
 
+### Multiple data lookups
+
+Although it may appear that the singular lookup operation of ~5µs is pretty quick, when this operation is occuring inside a loop with a large number of iterations this can quickly become a problem. For instance looping over 10 million times (easy to do for big datasets or multiple dimensions) this will take ~50 seconds.
+
+Another way at approaching the lookup problem is to instead rephrase it as a `join` operation, where we more efficiently combine two distinct datasets. Afterwhich we can perform more efficient vectorised operations. This scales much better than the linear scaling of the original singular lookup approach and is easier to read. 
+
+For instance, consider looping through two DataFrames that contain the `Width` and `Length` of a set of shapes and trying to determine their area (we assume the indices of these DataFrames are already aligned). 
+
+Let's generate a test dataset:
+```pandas
+import numpy as np
+import pandas as pd
+
+n_shapes = 100000
+widths = pd.DataFrame(data={"Width": np.random.uniform(0, 1, n_shapes)})
+lengths = pd.DataFrame(data={"Length": np.random.uniform(0, 1, n_shapes)})
+```
+
+Our naive singular lookup approach in this case takes 0.6s:
+```python
+areas = np.full(n_shapes, None)
+
+for i, width in enumerate(widths.to_numpy()):
+    areas[i] = widths.at[i, "Width"]
+```
+
+We can more efficiently performing the lookup of a single `join` operation of the two tables, followed by a vectorised operation. In this case the execution is ~243x faster and far more readable:
+```python
+shapes = widths.join(lengths)
+areas = shapes["Width"].to_numpy() * shapes["Length"].to_numpy()
+```
 
 ### Looping over data
 
 
 Avoid `iterrows`, it's almost always a terrible solution. 
 
-`vectorize` operations will normally provide the best performance.
+`vectorized` operations will normally provide the best performance.
 
 If you have to apply a bespoke function `apply` can be fast.
 
-Alternatively it might be worth revaluting the problem as a problem of joining to tables together, as `merge` is extremely efficient.
+Alternatively it might be worth reevaluating the problem. For example if the execution can be recast into a problem of joining to tables together `merge` can be extremely efficient.
 
 ### Inplace
 

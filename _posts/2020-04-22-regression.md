@@ -78,7 +78,11 @@ Pruning is act of removing nodes from the tree for which its child leaves have n
 
 ## Random forest
 
-Ensemble of decision trees
+Random forests are built from an ensemble of decision trees. This ensemble learning averages the prediction of a large number of weak learners, improving performance and reducing overfitting. Random forests have two key features that improve their performance:
+- **Bagging** - Bootstrap aggregation (bagging) randomly selects with replacement sub selections of the training data, building individual trees that only use the selected subset. This avoids overfitting as the different trees in the ensemble are trained on different parts of the data.
+- **Random feature selection** - A downside of bagging is the resultant trees are still highly correlated with one another. To improve the generality of training, trees are only trained on a random subset of the features, ensuring that different trees in the forest learn different patterns in the data. 
+
+- Like decision trees are scale invariant.
 
 
 
