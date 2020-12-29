@@ -16,9 +16,9 @@ There are several different factory patterns ranging from the simple factory pat
 <div class="table-wrapper">
   <table>
     <tbody>
-      <tr><td>**Summary:**</td><td>A utility class that dynamically creates an instance of a class at runtime from a family of derived classes.</td></tr>
-      <tr><td>**Problem:**</td><td>We want to decide at runtime what object is to be created based on some configuration or application parameter. When we write the code, we do not know what class should be instantiated.</td></tr>
-      <tr><td>**Solution:**</td><td>Define an interface for creating an object, but let subclasses decide which class to instantiate. Factory Method lets a class defer instantiation to subclasses.</td></tr>
+      <tr><th>Summary</th><td>A utility class that dynamically creates an instance of a class at runtime from a family of derived classes.</td></tr>
+      <tr><th>Problem</th><td>We want to decide at runtime what object is to be created based on some configuration or application parameter. When we write the code, we do not know what class should be instantiated.</td></tr>
+      <tr><th>Solution</th><td>Define an interface for creating an object, but let subclasses decide which class to instantiate. Factory Method lets a class defer instantiation to subclasses.</td></tr>
     </tbody>
   </table>
 </div>
